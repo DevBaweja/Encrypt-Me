@@ -15,5 +15,8 @@
     "url": "https://github.com/DevBaweja/Encrypt-Me/issues"
   },
   "homepage": "https://github.com/DevBaweja/Encrypt-Me#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
