@@ -40,7 +40,17 @@ const decrypt = (cipher, key) => {
     return plain;
 };
 
+const attack = cipher => {
+    // Key Domain [0,25]
+    let key;
+    for (let i = 1; i < 26; i++) {
+        key = i;
+        const plain = decrypt(cipher, key);
+        console.log(`PT: ${plain}, Key : ${key} `);
+    }
+};
 module.exports = {
     encrypt,
     decrypt,
+    attack,
 };

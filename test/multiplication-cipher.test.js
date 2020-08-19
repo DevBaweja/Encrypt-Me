@@ -1,5 +1,5 @@
 const { testString, randomString } = require('../util/base.util');
-const { encrypt, decrypt } = require('../src/additional-cipher');
+const { encrypt, decrypt } = require('../src/multiplication-cipher');
 
 const test = testString();
 const random = randomString();
