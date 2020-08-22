@@ -1,6 +1,9 @@
 const { getAscii, getValue, modulus } = require('../util/base.util.js');
 
+// (plain,key) -> cipher | -1
 const encrypt = (plain, key) => {
+    if (!isValidKey(key)) return -1;
+
     let cipher = '';
     const mod = 26;
     const list = plain.split('');
@@ -19,7 +22,10 @@ const encrypt = (plain, key) => {
     return cipher;
 };
 
+// (cipher,key) -> plain | -1
 const decrypt = (cipher, key) => {
+    if (!isValidKey(key)) return -1;
+
     let plain = '';
     const mod = 26;
     const list = cipher.split('');
@@ -40,17 +46,40 @@ const decrypt = (cipher, key) => {
     return plain;
 };
 
-const attack = cipher => {
+// all valid keys: []
+const getAllValidKeys = () => {
     const validKeys = Array.from(Array(25), (_, i) => i + 1);
+    return validKeys;
+};
+
+// is valid key: true | false
+const isValidKey = key => {
+    const validKeys = getAllValidKeys();
+    return validKeys.includes(key);
+};
+
+// any valid key: key
+const getValidKey = () => {
+    const validKeys = getAllValidKeys();
+    const index = Math.floor(validKeys.length * Math.random());
+    return validKeys[index];
+};
+
+// cipher -> all plain with keys : [[plain],[key]]
+const attack = cipher => {
+    const validKeys = getAllValidKeys();
+    const validPlains = [];
     validKeys.forEach(key => {
-        const plain = decrypt(cipher, key);
-        // ! For Development
-        console.log(`Valid PT: ${plain}, Key : ${key} `);
+        validPlains.push(decrypt(cipher, key));
     });
+    return [validPlains, validKeys];
 };
 
 module.exports = {
     encrypt,
     decrypt,
     attack,
+    getAllValidKeys,
+    isValidKey,
+    getValidKey,
 };

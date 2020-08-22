@@ -2,9 +2,8 @@ const { getAscii, getValue, modulus } = require('../util/base.util.js');
 
 // (plain,key) -> cipher | -1
 const encrypt = (plain, key) => {
-    // Checking if key is invertible
-    const invKey = getInvKey(key);
-    if (invKey == -1) return -1;
+    // Checking if key is valid
+    if (!isValidKey(key)) return -1;
 
     let cipher = '';
     const mod = 26;
@@ -42,9 +41,10 @@ const getInvKey = key => {
 
 // (cipher,key) -> plain | -1
 const decrypt = (cipher, key) => {
-    // Checking if key is invertible
+    // Checking if key is valid
+    if (!isValidKey(key)) return -1;
+
     const invKey = getInvKey(key);
-    if (invKey == -1) return -1;
 
     let plain = '';
     const mod = 26;
@@ -72,6 +72,12 @@ const getAllValidKeys = () => {
     return validKeys;
 };
 
+// is valid key: true | false
+const isValidKey = key => {
+    const validKeys = getAllValidKeys();
+    return validKeys.includes(key);
+};
+
 // any valid key: key
 const getValidKey = () => {
     const validKeys = getAllValidKeys();
@@ -79,13 +85,7 @@ const getValidKey = () => {
     return validKeys[index];
 };
 
-// is valid key: true | false
-const isValidKey = key => {
-    const validKeys = getAllValidKeys();
-    return validKeys.includes(key);
-};
-
-// cipher -> all plain with keys : []
+// cipher -> all plain with keys : [[plain],[key]]
 const attack = cipher => {
     const validKeys = getAllValidKeys();
     const validPlains = [];

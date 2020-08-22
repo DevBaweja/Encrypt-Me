@@ -20,13 +20,17 @@ const modulus = (value, mod) => {
     return newAscii;
 };
 
+// Random b/w [min,max]
 const random = (min = 0, max = 26) => {
     return Math.floor(Math.random() * (max - min) + min);
 };
+
+// 'abcd ... wxyz'
 const testString = () => {
     return 'abcd efgh ijklmn opqr stuv wxyz';
 };
 
+// Random seq of chars
 const randomString = (len = 26) => {
     let string = '';
     for (let i = 0; i < len; i++) {
