@@ -2,16 +2,20 @@
 
 ### Abbr:
 
+```
 PT - Plain Text
 CT - Cipher Text
 Ek - Encryption Function
 Dk - Decryption Function
 k - Key
+```
 
 ### Encryption and Decryption
 
+```
 CT = Ek(PT)
 PT = Dk(CT)
+```
 
 # Mono Alphabetic Cipher -
 
