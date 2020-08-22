@@ -24,13 +24,14 @@ const encrypt = (plain, key) => {
     return cipher;
 };
 
-// key -> invKey, -1
+// key -> invKey | -1
 const getInvKey = key => {
     let invKey = -1;
     const mod = 26;
 
-    // Since even key cann't be inverted
-    for (let validKey = 1; validKey < 26; validKey += 2) {
+    // Since all key cann't be inverted
+    const validKeys = getAllValidKeys();
+    for (let validKey of validKeys) {
         if (modulus(key * validKey, mod) === 1) {
             invKey = validKey;
             break;
@@ -65,17 +66,41 @@ const decrypt = (cipher, key) => {
     return plain;
 };
 
-//
-const attack = cipher => {
+// all valid keys -> []
+const getAllValidKeys = () => {
     const validKeys = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
+    return validKeys;
+};
+
+// any valid key -> key
+const getValidKey = () => {
+    const validKeys = getAllValidKeys();
+    const index = Math.floor(validKeys.length * Math.random());
+    return validKeys[index];
+};
+
+// is valid key -> true | false
+const isValidKey = key => {
+    const validKeys = getAllValidKeys();
+    return validKeys.includes(key);
+};
+
+// cipher -> all plain
+const attack = cipher => {
+    const validKeys = getAllValidKeys();
     validKeys.forEach(key => {
-        const plain = decrypt(cipher, key);
+        const validPlains = decrypt(cipher, key);
         // ! For Development
-        console.log(`Valid PT: ${plain}, Key : ${key} `);
+        console.log(`Valid PT: ${validPlains}, Key : ${key} `);
     });
 };
+
 module.exports = {
     encrypt,
     decrypt,
     attack,
+    getAllValidKeys,
+    isValidKey,
+    getValidKey,
+    getInvKey,
 };
