@@ -37,7 +37,7 @@ const decrypt = (cipher, key) => {
         if (ascii !== -1) {
             // Additional Decryption Function
             // Modulus
-            const newAscii = modulus(ascii - key, mod);
+            const newAscii = modulus(Math.abs(ascii - key), mod);
 
             const value = getValue(newAscii);
             plain += value;

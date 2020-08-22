@@ -25,7 +25,8 @@ const encrypt = (plain, key) => {
 
 // key -> invKey | -1
 const getInvKey = key => {
-    let invKey = -1;
+    if (!isValidKey(key)) return -1;
+    let invKey;
     const mod = 26;
 
     // Since all key cann't be inverted
@@ -33,10 +34,9 @@ const getInvKey = key => {
     for (let validKey of validKeys) {
         if (modulus(key * validKey, mod) === 1) {
             invKey = validKey;
-            break;
+            return invKey;
         }
     }
-    return invKey;
 };
 
 // (cipher,key) -> plain | -1

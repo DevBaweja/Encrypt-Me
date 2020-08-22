@@ -13,22 +13,16 @@ const getValue = ascii => {
     return value;
 };
 
-// (28,26) -> 2, (-2,26) -> 24
-const modulus = (value, mod) => {
-    let newAscii = value % mod;
-    if (newAscii < 0) newAscii = newAscii + mod;
-    return newAscii;
-};
+// value % mod
+const modulus = (value, mod) => value % mod;
 
 // Random b/w [min,max]
-const random = (min = 0, max = 26) => {
-    return Math.floor(Math.random() * (max - min) + min);
-};
+const random = (min = 0, max = 26) => Math.floor(Math.random() * (max - min) + min);
 
 // 'abcd ... wxyz'
-const testString = () => {
-    return 'abcd efgh ijklmn opqr stuv wxyz';
-};
+const testString = () => 'abcd efgh ijklmn opqr stuv wxyz';
+
+const specialString = () => '1!2@3#4$:.;';
 
 // Random seq of chars
 const randomString = (len = 26) => {
@@ -47,4 +41,5 @@ module.exports = {
     random,
     testString,
     randomString,
+    specialString,
 };
