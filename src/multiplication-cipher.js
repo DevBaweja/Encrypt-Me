@@ -66,33 +66,33 @@ const decrypt = (cipher, key) => {
     return plain;
 };
 
-// all valid keys -> []
+// all valid keys: []
 const getAllValidKeys = () => {
     const validKeys = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
     return validKeys;
 };
 
-// any valid key -> key
+// any valid key: key
 const getValidKey = () => {
     const validKeys = getAllValidKeys();
     const index = Math.floor(validKeys.length * Math.random());
     return validKeys[index];
 };
 
-// is valid key -> true | false
+// is valid key: true | false
 const isValidKey = key => {
     const validKeys = getAllValidKeys();
     return validKeys.includes(key);
 };
 
-// cipher -> all plain
+// cipher -> all plain with keys : []
 const attack = cipher => {
     const validKeys = getAllValidKeys();
+    const validPlains = [];
     validKeys.forEach(key => {
-        const validPlains = decrypt(cipher, key);
-        // ! For Development
-        console.log(`Valid PT: ${validPlains}, Key : ${key} `);
+        validPlains.push(decrypt(cipher, key));
     });
+    return [validPlains, validKeys];
 };
 
 module.exports = {
