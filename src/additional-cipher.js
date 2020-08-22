@@ -41,14 +41,14 @@ const decrypt = (cipher, key) => {
 };
 
 const attack = cipher => {
-    // Key Domain [0,25]
-    let key;
-    for (let i = 1; i < 26; i++) {
-        key = i;
+    const validKeys = Array.from(Array(25), (_, i) => i + 1);
+    validKeys.forEach(key => {
         const plain = decrypt(cipher, key);
-        console.log(`PT: ${plain}, Key : ${key} `);
-    }
+        // ! For Development
+        console.log(`Valid PT: ${plain}, Key : ${key} `);
+    });
 };
+
 module.exports = {
     encrypt,
     decrypt,

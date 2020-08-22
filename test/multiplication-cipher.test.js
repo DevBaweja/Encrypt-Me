@@ -1,15 +1,43 @@
 const { testString, randomString } = require('../util/base.util');
-const { encrypt, decrypt } = require('../src/multiplication-cipher');
+const { encrypt, decrypt, attack } = require('../src/multiplication-cipher');
 
 const test = testString();
 const random = randomString();
 
-console.log('----TEST----');
-console.log(test);
-console.log(encrypt(test, 2));
-console.log(decrypt(encrypt(test, 2), 2));
+const validArgs = ['--test', '--random', '--attack'];
+const argv = process.argv[process.argv.length - 1];
+if (validArgs.findIndex(arg => arg === argv) === -1) {
+    console.log('Invalid Argument!');
+    process.exit(-1);
+}
 
-console.log('----RANDOM----');
-console.log(random);
-console.log(encrypt(random, 2));
-console.log(decrypt(encrypt(random, 2), 2));
+const key = 3;
+switch (argv) {
+    case '--test':
+        {
+            console.log('----TEST----');
+            console.log(`PT: ${test}`);
+            console.log(`CT: ${encrypt(test, key)}`);
+            console.log(`PT: ${decrypt(encrypt(test, key), key)}`);
+        }
+        break;
+
+    case '--random':
+        {
+            console.log('----RANDOM----');
+            console.log(`PT: ${random}`);
+            console.log(`CT: ${encrypt(random, key)}`);
+            console.log(`PT: ${decrypt(encrypt(random, key), key)}`);
+        }
+        break;
+    case '--attack':
+        {
+            console.log('----ATTACK----');
+            console.log(`PT: ${test}`);
+            console.log(`CT: ${encrypt(test, key)}`);
+            attack(encrypt(test, key));
+        }
+        break;
+    default: {
+    }
+}

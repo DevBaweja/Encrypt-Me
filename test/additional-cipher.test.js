@@ -11,7 +11,7 @@ if (validArgs.findIndex(arg => arg === argv) === -1) {
     process.exit(-1);
 }
 
-const key = 30;
+const key = 2;
 switch (argv) {
     case '--test':
         {
@@ -33,7 +33,7 @@ switch (argv) {
 
     case '--attack':
         {
-            console.log('----RANDOM----');
+            console.log('----ATTACK----');
             console.log(`PT: ${test}`);
             console.log(`CT: ${encrypt(test, key)}`);
             attack(encrypt(test, key));
