@@ -48,9 +48,9 @@ switch (argv) {
             console.log(`Key: ${key}`);
             console.log(`PT: ${test}`);
             console.log(`CT: ${encrypt(test, key)}`);
-            const [validPlains, validKeys] = attack(encrypt(test, key));
-            validKeys.forEach((key, index) => {
-                console.log(`Valid PT: ${validPlains[index]}, Valid Key : ${key} `);
+            const valid = attack(encrypt(test, key));
+            valid.forEach(item => {
+                console.log(`Valid PT: ${item.plain}, Valid Key : ${item.key} `);
             });
         }
         break;

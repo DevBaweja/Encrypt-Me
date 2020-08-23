@@ -48,7 +48,7 @@ const decrypt = (cipher, key) => {
 
 // all valid keys: []
 const getAllValidKeys = () => {
-    const validKeys = Array.from(Array(25), (_, i) => i + 1);
+    const validKeys = Array.from(Array(26).keys());
     return validKeys;
 };
 
@@ -65,14 +65,20 @@ const getValidKey = () => {
     return validKeys[index];
 };
 
-// cipher -> all plain with keys : [[plain],[key]]
+// cipher -> all plain with keys : [ {plain, keys} ]
 const attack = cipher => {
     const validKeys = getAllValidKeys();
     const validPlains = [];
     validKeys.forEach(key => {
         validPlains.push(decrypt(cipher, key));
     });
-    return [validPlains, validKeys];
+    // Merging two array into key value pair
+    const valid = validKeys.map((key, index) => {
+        const plain = validPlains[index];
+        return { key, plain };
+    });
+
+    return valid;
 };
 
 module.exports = {
