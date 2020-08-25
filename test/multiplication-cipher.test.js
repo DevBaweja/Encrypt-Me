@@ -93,12 +93,14 @@ switch (argv) {
             console.log(`Key ${key} is valid key.`);
         }
         break;
-    case '--invKey': {
-        console.log('---- Inverted Key ---- ');
-        const invKey = getInvKey(key);
-        if (invKey !== -1) console.log(`Key: ${key}, Inverted Key: ${invKey}`);
-        else console.log(`Key: ${key} is not an inverted key.`);
-    }
+    case '--invKey':
+        {
+            console.log('---- Inverted Key ---- ');
+            const invKey = getInvKey(key);
+            if (invKey !== -1) console.log(`Key: ${key}, Inverted Key: ${invKey}`);
+            else console.log(`Key: ${key} is not an inverted key.`);
+        }
+        break;
     default: {
     }
 }

@@ -18,5 +18,8 @@
   "description": "",
   "devDependencies": {
     "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "ndb": "^1.1.5"
   }
 }
