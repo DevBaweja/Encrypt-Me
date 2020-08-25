@@ -14,7 +14,11 @@ const getValue = ascii => {
 };
 
 // value % mod
-const modulus = (value, mod) => value % mod;
+const modulus = (value, mod) => {
+    let newValue = value % mod;
+    if (newValue < 0) newValue = newValue + mod;
+    return newValue;
+};
 
 // Random b/w [min,max]
 const random = (min = 0, max = 26) => Math.floor(Math.random() * (max - min) + min);

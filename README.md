@@ -17,12 +17,12 @@ CT = Ek(PT)
 PT = Dk(CT)
 ```
 
-# 1.  Mono Alphabetic Cipher -
+# 1. Mono Alphabetic Cipher -
 
 A monoalphabetic cipher is any cipher in which the letters of the plain text are mapped to cipher text letters based on a single alphabetic key.
 One to One Mapping
 
-+ ##  Additional Cipher
+-   ## Additional Cipher
 
 src/additional-cipher.js
 
@@ -43,7 +43,7 @@ src/additional-cipher.js
     including zero as key in that case we will have
     same plain and cipher text
 
-+ ## Multiplication Cipher
+-   ## Multiplication Cipher
 
 src/multiplication-cipher.js
 
@@ -71,10 +71,11 @@ src/multiplication-cipher.js
 
 ### Functions:
 
-    encrypt(plain,kadd,kmul):cipher
-    CT = ((PT x kadd) + kmul) mod 26
-    decrypt(cipher,kadd,kmul):plain
-    PT = ((CT - kmul) x inv(kadd)) mod 26
+    encrypt(plain, key: {kadd, kmul}):cipher
+    CT = ((PT x kmul) + kadd) mod 26
+
+    decrypt(cipher, key: {kadd, kmul}):plain
+    PT = ((CT - kadd) x inv(kmul)) mod 26
 
 ### Requirements:
 

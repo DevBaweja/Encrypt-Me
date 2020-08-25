@@ -3,9 +3,10 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "start": "cd test && nodemon affine-cipher.test.js --invKey",
-        "dev": "cd test && node affine-cipher.test.js --invKey",
-        "test": "cd test && ndb affine-cipher.test.js --invKey"
+        "multiplication": "cd test && nodemon multiplication-cipher.test.js --test",
+        "additional": "cd test && nodemon additional-cipher.test.js --test",
+        "affine": "cd test && nodemon affine-cipher.test.js --test",
+        "test": "cd test && ndb affine-cipher.test.js --test"
     },
     "author": "",
     "license": "ISC",

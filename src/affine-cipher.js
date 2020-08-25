@@ -1,19 +1,68 @@
 const { getAscii, getValue, modulus } = require('../util/base.util.js');
 
+// (plain, key: { kadd, kmul}) -> cipher | -1
+const encrypt = (plain, { kadd, kmul }) => {
+    // Checking if key is valid
+    if (!isValidKey({ kadd, kmul })) return -1;
+
+    let cipher = '';
+    const mod = 26;
+    const list = plain.split('');
+
+    list.forEach(item => {
+        const ascii = getAscii(item);
+        // [0-25] , -1
+
+        if (ascii !== -1) {
+            // Affine Encryption Function
+            const newAscii = modulus(ascii * kmul + kadd, mod);
+            const value = getValue(newAscii);
+            cipher += value;
+        } else cipher += item;
+    });
+    return cipher;
+};
+
 // key -> invKey | -1
-const getInvKey = key => {
-    if (!isValidKey(key)) return -1;
+const getInvKey = ({ kadd, kmul }) => {
+    if (!isValidKey({ kadd, kmul })) return -1;
     let invKey;
     const mod = 26;
 
     // Since all key cann't be inverted
     const validKeys = getAllValidKeys();
     for (let validKey of validKeys) {
-        if (modulus(key.kmul * validKey.kmul, mod) === 1 && key.kadd === validKey.kadd) {
+        if (modulus(validKey.kmul * kmul, mod) === 1 && validKey.kadd === kadd) {
             invKey = validKey;
             return invKey;
         }
     }
+};
+
+// (cipher, key: { kadd, kmul}) -> plain | -1
+const decrypt = (cipher, { kadd, kmul }) => {
+    // Checking if key is valid
+    if (!isValidKey({ kadd, kmul })) return -1;
+
+    const invKey = getInvKey({ kadd, kmul });
+
+    let plain = '';
+    const mod = 26;
+    const list = cipher.split('');
+
+    list.forEach(item => {
+        const ascii = getAscii(item);
+        // [0-25] , -1
+
+        if (ascii !== -1) {
+            // Affine Decryption Function
+            const newAscii = modulus((ascii - invKey.kadd) * invKey.kmul, mod);
+
+            const value = getValue(newAscii);
+            plain += value;
+        } else plain += item;
+    });
+    return plain;
 };
 
 // all valid keys: [ { kadd,kmul } ]
@@ -44,6 +93,8 @@ const getValidKey = () => {
 };
 
 module.exports = {
+    encrypt,
+    decrypt,
     getAllValidKeys,
     isValidKey,
     getValidKey,

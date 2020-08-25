@@ -56,7 +56,6 @@ const decrypt = (cipher, key) => {
 
         if (ascii !== -1) {
             // Multiplication Decryption Function
-            // Modulus
             const newAscii = modulus(ascii * invKey, mod);
 
             const value = getValue(newAscii);
