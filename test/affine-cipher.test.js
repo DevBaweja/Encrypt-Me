@@ -1,5 +1,13 @@
 const { testString, randomString, specialString } = require('../util/base.util');
-const { encrypt, decrypt, getAllValidKeys, isValidKey, getValidKey, getInvKey } = require('../src/affine-cipher');
+const {
+    encrypt,
+    decrypt,
+    attack,
+    getAllValidKeys,
+    isValidKey,
+    getValidKey,
+    getInvKey,
+} = require('../src/affine-cipher');
 
 const test = testString();
 const random = randomString();
@@ -48,6 +56,18 @@ switch (argv) {
             console.log(`PT: ${special}`);
             console.log(`CT: ${encrypt(special, key)}`);
             console.log(`PT: ${decrypt(encrypt(special, key), key)}`);
+        }
+        break;
+    case '--attack':
+        {
+            console.log('----ATTACK----');
+            console.log(`Key - kadd: ${key.kadd}, kmul: ${key.kmul} `);
+            console.log(`PT: ${test}`);
+            console.log(`CT: ${encrypt(test, key)}`);
+            const [validPlains, validKeys] = attack(encrypt(test, key));
+            validKeys.forEach((key, index) => {
+                console.log(`Valid PT - ${validPlains[index]}, Valid Key - kadd: ${key.kadd}, kmul: ${key.kmul} `);
+            });
         }
         break;
     case '--allValidKeys':

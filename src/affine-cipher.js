@@ -92,9 +92,20 @@ const getValidKey = () => {
     return validKeys[index];
 };
 
+// cipher -> all plain with keys : [plain: [],key: []]
+const attack = cipher => {
+    const validKeys = getAllValidKeys();
+    const validPlains = [];
+    validKeys.forEach(key => {
+        validPlains.push(decrypt(cipher, key));
+    });
+    return [validPlains, validKeys];
+};
+
 module.exports = {
     encrypt,
     decrypt,
+    attack,
     getAllValidKeys,
     isValidKey,
     getValidKey,
