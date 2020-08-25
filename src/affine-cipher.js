@@ -1,6 +1,4 @@
 const { getAscii, getValue, modulus } = require('../util/base.util.js');
-const additionalCipher = require('./additional-cipher');
-const multiplicationCipher = require('./multiplication-cipher');
 
 // key -> invKey | -1
 const getInvKey = key => {
@@ -20,8 +18,8 @@ const getInvKey = key => {
 
 // all valid keys: [ { kadd,kmul } ]
 const getAllValidKeys = () => {
-    const kaddAll = additionalCipher.getAllValidKeys();
-    const kmulAll = multiplicationCipher.getAllValidKeys();
+    const kaddAll = Array.from(Array(26).keys());
+    const kmulAll = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
 
     const valid = [];
     kaddAll.forEach(kadd => {

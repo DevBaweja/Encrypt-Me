@@ -1,25 +1,26 @@
 {
-  "name": "encrypt-me",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DevBaweja/Encrypt-Me.git"
-  },
-  "bugs": {
-    "url": "https://github.com/DevBaweja/Encrypt-Me/issues"
-  },
-  "homepage": "https://github.com/DevBaweja/Encrypt-Me#readme",
-  "description": "",
-  "devDependencies": {
-    "nodemon": "^2.0.4"
-  },
-  "dependencies": {
-    "ndb": "^1.1.5"
-  }
+    "name": "encrypt-me",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "start": "cd test && nodemon affine-cipher.test.js --invKey",
+        "dev": "cd test && node affine-cipher.test.js --invKey",
+        "test": "cd test && ndb affine-cipher.test.js --invKey"
+    },
+    "author": "",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DevBaweja/Encrypt-Me.git"
+    },
+    "bugs": {
+        "url": "https://github.com/DevBaweja/Encrypt-Me/issues"
+    },
+    "homepage": "https://github.com/DevBaweja/Encrypt-Me#readme",
+    "description": "",
+    "devDependencies": {
+        "ndb": "^1.1.5",
+        "nodemon": "^2.0.4"
+    },
+    "dependencies": {}
 }

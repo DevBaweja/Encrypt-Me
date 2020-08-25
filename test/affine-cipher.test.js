@@ -19,21 +19,21 @@ switch (argv) {
             console.log('----All Valid Keys----');
             const valid = getAllValidKeys();
             valid.forEach(item => {
-                console.log(`kadd: ${item.kadd}, kmul: ${item.kmul} `);
+                console.log(`Key - kadd: ${item.kadd}, kmul: ${item.kmul} `);
             });
         }
         break;
     case '--isValidKey':
         {
             console.log('----Is Valid Key----');
-            console.log(`kadd: ${key.kadd}, kmul: ${key.kmul} is ${isValidKey(key) ? 'valid' : 'invalid'}`);
+            console.log(`Key - kadd: ${key.kadd}, kmul: ${key.kmul} is ${isValidKey(key) ? 'valid' : 'invalid'}`);
         }
         break;
     case '--validKey':
         {
             console.log('----Valid Key----');
             let key = getValidKey();
-            console.log(`kadd: ${key.kadd}, kmul: ${key.kmul} is valid key.`);
+            console.log(`Key - kadd: ${key.kadd}, kmul: ${key.kmul} is valid key.`);
         }
         break;
     case '--invKey':
@@ -42,9 +42,9 @@ switch (argv) {
             const invKey = getInvKey(key);
             if (invKey !== -1)
                 console.log(
-                    `kadd: ${key.kadd}, kmul: ${key.kmul}, Inverted Key- kadd: ${invKey.key.kadd}, kmul: ${invKey.key.kmul}`
+                    `Key - kadd: ${key.kadd}, kmul: ${key.kmul}, Inverted Key - kadd: ${invKey.kadd}, kmul: ${invKey.kmul}`
                 );
-            else console.log(`kadd: ${key.kadd}, kmul: ${key.kmul} is not an inverted key.`);
+            else console.log(`Key - kadd: ${key.kadd}, kmul: ${key.kmul} is not an inverted key.`);
         }
         break;
 }
