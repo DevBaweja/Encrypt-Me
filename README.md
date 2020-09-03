@@ -88,3 +88,24 @@ src/multiplication-cipher.js
 
     kadd - 26 values
     kmul - 12 values
+
+## 3. Monoalphabetic Cipher
+
+src/monoalphabetic-cipher.js
+
+### Functions:
+
+    encrypt(plain, key):cipher
+    CT = key[PT]
+
+    decrypt(cipher, key):plain
+    PT = inv(key)[CT]
+
+### Requirements:
+
+    key - Key of length 26 containing all the alphabetic only once
+    ie It is mapping of between plain characters and cipher characters
+
+### Key Domain : 26!
+
+    Quite large key domain, so brute force attack is not feasible.
