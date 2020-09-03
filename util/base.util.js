@@ -26,6 +26,8 @@ const random = (min = 0, max = 26) => Math.floor(Math.random() * (max - min) + m
 // 'abcd ... wxyz'
 const testString = () => 'abcd efgh ijklmn opqr stuv wxyz';
 
+const alphabets = () => 'abcdefghijklmnopqrstuvwxyz';
+
 const specialString = () => '1!2@3#4$:.;';
 
 // Random seq of chars
@@ -44,6 +46,7 @@ module.exports = {
     modulus,
     random,
     testString,
+    alphabets,
     randomString,
     specialString,
 };
