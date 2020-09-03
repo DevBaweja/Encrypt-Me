@@ -39,7 +39,7 @@ switch (argv) {
             console.log(`Key: ${key}`);
             console.log(`PT: ${special}`);
             console.log(`CT: ${encrypt(special, key)}`);
-            // console.log(`PT: ${decrypt(encrypt(special, key), key)}`);
+            console.log(`PT: ${decrypt(encrypt(special, key), key)}`);
         }
         break;
     case '--isValidKey':
