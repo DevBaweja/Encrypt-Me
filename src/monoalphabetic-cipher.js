@@ -7,6 +7,7 @@ const encrypt = (plain, key) => {
 
     let cipher = '';
     const list = plain.split('');
+    const keyList = key.split('');
 
     list.forEach(item => {
         const ascii = getAscii(item);
@@ -14,7 +15,7 @@ const encrypt = (plain, key) => {
 
         if (ascii !== -1) {
             // Monoalphabetic Encryption Function
-            const value = key[ascii];
+            const value = keyList[ascii];
             cipher += value;
         } else cipher += item;
     });
@@ -27,8 +28,10 @@ const getInvKey = key => {
     let invKey = '';
 
     const list = alphabets().split('');
+    const keyList = key.split('');
+
     list.forEach(item => {
-        const ascii = key.indexOf(item);
+        const ascii = keyList.indexOf(item);
         const value = getValue(ascii);
         invKey += value;
     });
@@ -44,6 +47,7 @@ const decrypt = (cipher, key) => {
 
     let plain = '';
     const list = cipher.split('');
+    const invKeyList = invKey.split('');
 
     list.forEach(item => {
         const ascii = getAscii(item);
@@ -51,7 +55,7 @@ const decrypt = (cipher, key) => {
 
         if (ascii !== -1) {
             // Multiplication Decryption Function
-            const value = invKey[ascii];
+            const value = invKeyList[ascii];
             plain += value;
         } else plain += item;
     });

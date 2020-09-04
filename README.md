@@ -52,7 +52,7 @@ src/multiplication-cipher.js
     encrypt(plain,key):cipher
     CT = (PT x k) mod 26
     decrypt(cipher,key):plain
-    PT = (CT x inv(k)) mod 26`
+    PT = (CT x inv(k)) mod 26
 
 ### Requirements:
 
@@ -119,7 +119,7 @@ src/autokey-cipher.js
     encrypt(plain, key):{ cipher, newKey }
     CT(i) = (PT(i) + newKey(i)) mod 26
 
-    decrypt(cipher, newKey):plain
+    decrypt(cipher, key):plain
     PT(i) = (CT(i) - newKey(i)) mod 26
 
 ### Requirements:

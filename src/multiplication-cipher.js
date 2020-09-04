@@ -84,7 +84,7 @@ const getValidKey = () => {
     return validKeys[index];
 };
 
-// cipher -> all plain with keys : [plain: [],key: []]
+// cipher -> all plain with keys : {plain: [],key: []}
 const attack = cipher => {
     const validKeys = getAllValidKeys();
     const validPlains = [];
