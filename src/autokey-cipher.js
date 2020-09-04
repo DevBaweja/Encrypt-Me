@@ -1,4 +1,4 @@
-const { getAscii, getValue, modulus } = require('../util/base.util.js');
+const { getAscii, getValue, modulus, alphabets, circularShiftLeft } = require('../util/base.util.js');
 
 // (plain,key) -> cipher | -1
 const encrypt = (plain, key) => {
@@ -43,6 +43,23 @@ const decrypt = (cipher, newKey) => {
         } else plain += item;
     });
     return plain;
+};
+
+// Tabula Recta - [][]
+const generateTabulaRecta = () => {
+    const tabula = [];
+    const mod = 26;
+    let index = 0;
+    while (index < mod) {
+        tabula[index] = circularShiftLeft(alphabets().split(''), index);
+        index++;
+    }
+    return tabula;
+};
+
+//
+const getCipher = (plain, key) => {
+    return generateTabulaRecta()[plain][key];
 };
 
 // all valid keys: []

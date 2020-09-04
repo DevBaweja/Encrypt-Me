@@ -40,6 +40,26 @@ const randomString = (len = 26) => {
     return string;
 };
 
+// [1,2,3,4] -> [4,1,2,3]
+const circularShiftRight = (array, times = 1) => {
+    const newArray = [...array];
+    while (times > 0) {
+        newArray.unshift(newArray.pop());
+        times--;
+    }
+    return newArray;
+};
+
+// [1,2,3,4] -> [2,3,4,1]
+const circularShiftLeft = (array, times = 1) => {
+    const newArray = [...array];
+    while (times > 0) {
+        newArray.push(newArray.shift());
+        times--;
+    }
+    return newArray;
+};
+
 module.exports = {
     getAscii,
     getValue,
@@ -49,4 +69,6 @@ module.exports = {
     alphabets,
     randomString,
     specialString,
+    circularShiftRight,
+    circularShiftLeft,
 };
