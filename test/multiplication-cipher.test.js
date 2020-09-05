@@ -13,22 +13,7 @@ const test = testString();
 const random = randomString();
 const special = specialString();
 
-const validArgs = [
-    '--test',
-    '--random',
-    '--special',
-    '--attack',
-    '--allValidKeys',
-    '--isValidKey',
-    '--validKey',
-    '--invKey',
-];
 const argv = process.argv[process.argv.length - 1];
-if (validArgs.findIndex(arg => arg === argv) === -1) {
-    console.log('Invalid Argument!');
-    process.exit(-1);
-}
-
 const key = getValidKey();
 switch (argv) {
     case '--test':
@@ -102,5 +87,7 @@ switch (argv) {
         }
         break;
     default: {
+        console.log('Invalid Argument!');
+        process.exit(-1);
     }
 }

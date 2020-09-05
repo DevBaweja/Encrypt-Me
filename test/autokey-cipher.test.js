@@ -5,13 +5,7 @@ const { encrypt, decrypt, isValidKey, getValidKey } = require('../src/autokey-ci
 const test = 'attackatdawn';
 const random = randomString();
 
-const validArgs = ['--test', '--random', '--isValidKey', '--validKey'];
 const argv = process.argv[process.argv.length - 1];
-if (validArgs.findIndex(arg => arg === argv) === -1) {
-    console.log('Invalid Argument!');
-    process.exit(-1);
-}
-
 const size = 5;
 const key = getValidKey(size);
 switch (argv) {
@@ -48,5 +42,7 @@ switch (argv) {
         }
         break;
     default: {
+        console.log('Invalid Argument!');
+        process.exit(-1);
     }
 }
