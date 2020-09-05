@@ -64,46 +64,32 @@ const getCipherFromTabula = (plain, key) => {
     return generateTabulaRecta()[plain][key];
 };
 
-// all valid keys: []
-const getAllValidKeys = () => {
-    const validKeys = Array.from(Array(26), (_, i) => getValue(i));
-    return validKeys;
-};
-
 // is valid key: true | false
 const isValidKey = key => {
-    const validKeys = getAllValidKeys();
-    return validKeys.includes(key);
+    const keyList = key.split('');
+    let isValidKey = true;
+    for (const item of keyList) {
+        isValidKey = alphabets().split('').includes(item);
+        if (!isValidKey) return false;
+    }
+    return isValidKey;
 };
 
 // any valid key: key
-const getValidKey = () => {
-    const validKeys = getAllValidKeys();
-    const index = Math.floor(validKeys.length * Math.random());
-    return validKeys[index];
-};
-
-// cipher -> all plain with keys : [ {plain, keys} ]
-const attack = cipher => {
-    const validKeys = getAllValidKeys();
-    const validPlains = [];
-    validKeys.forEach(key => {
-        validPlains.push(decrypt(cipher, key));
-    });
-    // Merging two array into key value pair
-    const valid = validKeys.map((key, index) => {
-        const plain = validPlains[index];
-        return { key, plain };
-    });
-
-    return valid;
+const getValidKey = size => {
+    const keyList = alphabets().split('');
+    let validKey = '';
+    while (size > 0) {
+        const index = Math.floor(Math.random() * keyList.length);
+        validKey += keyList[index];
+        size--;
+    }
+    return validKey;
 };
 
 module.exports = {
     encrypt,
     decrypt,
-    attack,
-    getAllValidKeys,
     isValidKey,
     getValidKey,
     generateTabulaRecta,

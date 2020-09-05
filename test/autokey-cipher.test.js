@@ -1,19 +1,19 @@
 const { testString, randomString } = require('../util/base.util');
-const { encrypt, decrypt, attack, getAllValidKeys, isValidKey, getValidKey } = require('../src/autokey-cipher');
+const { encrypt, decrypt, isValidKey, getValidKey } = require('../src/autokey-cipher');
 
 // const test = testString();
 const test = 'attackatdawn';
 const random = randomString();
 
-const validArgs = ['--test', '--random', '--attack', '--allValidKeys', '--isValidKey', '--validKey'];
+const validArgs = ['--test', '--random', '--isValidKey', '--validKey'];
 const argv = process.argv[process.argv.length - 1];
 if (validArgs.findIndex(arg => arg === argv) === -1) {
     console.log('Invalid Argument!');
     process.exit(-1);
 }
 
-// const key = getValidKey();
-const key = 'queenly';
+const size = 5;
+const key = getValidKey(size);
 switch (argv) {
     case '--test':
         {
@@ -34,27 +34,6 @@ switch (argv) {
             console.log(`PT: ${decrypt(encrypt(random, key), key)}`);
         }
         break;
-    case '--attack':
-        {
-            console.log('----ATTACK----');
-            console.log(`Key: ${key}`);
-            console.log(`PT: ${test}`);
-            console.log(`CT: ${encrypt(test, key)}`);
-            const valid = attack(encrypt(test, key));
-            valid.forEach(item => {
-                console.log(`Valid PT: ${item.plain}, Valid Key : ${item.key} `);
-            });
-        }
-        break;
-    case '--allValidKeys':
-        {
-            console.log('----All Valid Keys----');
-            const validKeys = getAllValidKeys();
-            validKeys.forEach(key => {
-                console.log(`Key: ${key}`);
-            });
-        }
-        break;
     case '--isValidKey':
         {
             console.log('----Is Valid Key----');
@@ -64,7 +43,7 @@ switch (argv) {
     case '--validKey':
         {
             console.log('----Valid Key----');
-            let key = getValidKey();
+            let key = getValidKey(size);
             console.log(`Key ${key} is valid key.`);
         }
         break;
