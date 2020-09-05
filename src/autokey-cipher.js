@@ -2,9 +2,9 @@ const { getAscii, getValue, modulus, alphabets, circularShiftLeft } = require('.
 
 // (plain,key) -> cipher | -1
 const encrypt = (plain, key) => {
-    if (!isValidKey(key)) return -1;
+    // if (!isValidKey(key)) return -1;
 
-    const newKey = key + plain.slice(0, -1);
+    const newKey = key + plain.slice(0, -key.length);
     let cipher = '';
     const mod = 26;
     const list = plain.split('');
@@ -21,11 +21,11 @@ const encrypt = (plain, key) => {
             cipher += value;
         } else cipher += item;
     });
-    return { cipher, newKey };
+    return cipher;
 };
 
-// (cipher,newKey) -> plain | -1
-const decrypt = (cipher, newKey) => {
+// (cipher,key) -> plain | -1
+const decrypt = (cipher, key) => {
     let plain = '';
     const mod = 26;
     const list = cipher.split('');
@@ -33,13 +33,15 @@ const decrypt = (cipher, newKey) => {
     list.forEach((item, index) => {
         const ascii = getAscii(item);
         // [0-25] , -1
-        const keyAscii = getAscii(newKey[index]);
+        const keyAscii = getAscii(key[index]);
 
         if (ascii !== -1) {
             // AutoKey Decryption Function
             const newAscii = modulus(ascii - keyAscii, mod);
             const value = getValue(newAscii);
             plain += value;
+            // Autokey generation
+            key += value;
         } else plain += item;
     });
     return plain;
@@ -57,8 +59,8 @@ const generateTabulaRecta = () => {
     return tabula;
 };
 
-//
-const getCipher = (plain, key) => {
+// plain, key -> cipher (Tabula Recta)
+const getCipherFromTabula = (plain, key) => {
     return generateTabulaRecta()[plain][key];
 };
 
@@ -104,4 +106,6 @@ module.exports = {
     getAllValidKeys,
     isValidKey,
     getValidKey,
+    generateTabulaRecta,
+    getCipherFromTabula,
 };

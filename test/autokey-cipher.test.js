@@ -1,28 +1,27 @@
-const { testString, randomString, specialString } = require('../util/base.util');
+const { testString, randomString } = require('../util/base.util');
 const { encrypt, decrypt, attack, getAllValidKeys, isValidKey, getValidKey } = require('../src/autokey-cipher');
 
-const test = testString();
+// const test = testString();
+const test = 'attackatdawn';
 const random = randomString();
-const special = specialString();
 
-const validArgs = ['--test', '--random', '--special', '--attack', '--allValidKeys', '--isValidKey', '--validKey'];
+const validArgs = ['--test', '--random', '--attack', '--allValidKeys', '--isValidKey', '--validKey'];
 const argv = process.argv[process.argv.length - 1];
 if (validArgs.findIndex(arg => arg === argv) === -1) {
     console.log('Invalid Argument!');
     process.exit(-1);
 }
 
-const key = getValidKey();
+// const key = getValidKey();
+const key = 'queenly';
 switch (argv) {
     case '--test':
         {
             console.log('----TEST----');
             console.log(`Key: ${key}`);
             console.log(`PT: ${test}`);
-            const { newKey, cipher } = encrypt(test, key);
-            console.log(`New Key: ${newKey}`);
-            console.log(`CT: ${cipher}`);
-            console.log(`PT: ${decrypt(cipher, newKey)}`);
+            console.log(`CT: ${encrypt(test, key)}`);
+            console.log(`PT: ${decrypt(encrypt(test, key), key)}`);
         }
         break;
 
@@ -31,21 +30,8 @@ switch (argv) {
             console.log('----RANDOM----');
             console.log(`Key: ${key}`);
             console.log(`PT: ${random}`);
-            const { newKey, cipher } = encrypt(random, key);
-            console.log(`New Key: ${newKey}`);
-            console.log(`CT: ${cipher}`);
-            console.log(`PT: ${decrypt(cipher, newKey)}`);
-        }
-        break;
-    case '--special':
-        {
-            console.log('----SPECIAL----');
-            console.log(`Key: ${key}`);
-            console.log(`PT: ${special}`);
-            const { newKey, cipher } = encrypt(special, key);
-            console.log(`New Key: ${newKey}`);
-            console.log(`CT: ${cipher}`);
-            console.log(`PT: ${decrypt(cipher, newKey)}`);
+            console.log(`CT: ${encrypt(random, key)}`);
+            console.log(`PT: ${decrypt(encrypt(random, key), key)}`);
         }
         break;
     case '--attack':
