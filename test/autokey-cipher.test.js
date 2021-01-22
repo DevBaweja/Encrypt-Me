@@ -1,8 +1,7 @@
 const { testString, randomString } = require('../util/base.util');
 const { encrypt, decrypt, isValidKey, getValidKey } = require('../src/autokey-cipher');
 
-// const test = testString();
-const test = 'attackatdawn';
+const test = testString();
 const random = randomString();
 
 const argv = process.argv[process.argv.length - 1];
